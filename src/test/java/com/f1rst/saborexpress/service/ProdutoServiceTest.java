@@ -1,5 +1,6 @@
 package com.f1rst.saborexpress.service;
 
+import com.f1rst.saborexpress.DadosTeste;
 import com.f1rst.saborexpress.repository.Produto;
 import com.f1rst.saborexpress.repository.ProdutoRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,13 +21,7 @@ class ProdutoServiceTest {
 
     @Test
     void deveInserirProdutoCorretamente() {
-        Produto produto = new Produto(
-                0,
-                "Banoff",
-                5,
-                30,
-                LocalDate.of(2024, 5, 1)
-        );
+        Produto produto = DadosTeste.produto();
 
         service.inserir(produto);
 
