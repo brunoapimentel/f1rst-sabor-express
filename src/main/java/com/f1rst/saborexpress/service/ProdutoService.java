@@ -5,6 +5,8 @@ import com.f1rst.saborexpress.repository.ProdutoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ProdutoService {
@@ -12,5 +14,9 @@ public class ProdutoService {
 
     public void inserir(Produto produto) {
         repository.save(produto);
+    }
+
+    public List<Produto> listar() {
+        return repository.findAll();
     }
 }

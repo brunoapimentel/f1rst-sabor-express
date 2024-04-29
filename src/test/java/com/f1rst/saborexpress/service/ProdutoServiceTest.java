@@ -3,11 +3,16 @@ package com.f1rst.saborexpress.service;
 import com.f1rst.saborexpress.DadosTeste;
 import com.f1rst.saborexpress.repository.Produto;
 import com.f1rst.saborexpress.repository.ProdutoRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.time.LocalDate;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class ProdutoServiceTest {
     private ProdutoService service;
@@ -25,6 +30,17 @@ class ProdutoServiceTest {
 
         service.inserir(produto);
 
-        Mockito.verify(repository).save(produto);
+        verify(repository).save(produto);
+    }
+
+    @Test
+    void deveListarOsProdutos() {
+        List<Produto> listaProdutos = DadosTeste.listaProdutos();
+
+        when(repository.findAll()).thenReturn(listaProdutos);
+
+        List<Produto> produtosRetornados = service.listar();
+
+        assertEquals(listaProdutos, produtosRetornados);
     }
 }
